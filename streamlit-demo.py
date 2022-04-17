@@ -13,17 +13,25 @@ import altair as alt
 #--------------------------------------------------------
 # Headers
 
-original_header = '<p style="font-family:Courier; color:White; font-size: 48px;">Dashboard</p>'
+original_header = '<p style="font-family:Courier; color:Black; font-size: 48px;">Dashboard</p>'
 st.markdown(original_header, unsafe_allow_html=True)
 
-original_header = '<p style="font-family:Courier; color:#2BB3A0; font-size: 24px;">Data Analysis on Energy Consumption</p>'
+original_header = '<p style="font-family:Courier; color:#2BB3A0; font-size: 24px;">Keys Insights on Energy Consumption</p>'
 st.markdown(original_header, unsafe_allow_html=True)
+
 
 
 #--------------------------------------------------------
 # Component: File Uploader
 
 uploaded_file = st.sidebar.file_uploader("Choose a CSV file")
+
+if uploaded_file is None:
+    from PIL import Image
+    image = Image.open('picture1.jpg')
+    st.image(image)
+    st.caption('<a href="https://www.vecteezy.com/free-vector/solar-house">Image credits: Solar House Vectors by Vecteezy</a>', unsafe_allow_html=True)
+
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     df['timestamp'] = pd.DatetimeIndex(df["timestamp"])
@@ -61,13 +69,13 @@ if uploaded_file is not None:
 
         col1, col2 = st.columns(2)
         with col1: 
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Dataframe</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Dataframe</p>'
             st.markdown(original_header, unsafe_allow_html=True)
             st.dataframe(data=df, width=800, height=300)
             
 
         with col2:
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Statistics</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Statistics</p>'
             st.markdown(original_header, unsafe_allow_html=True) 
             st.write(df.describe())
     
@@ -80,12 +88,12 @@ if uploaded_file is not None:
 
         col1, col2 = st.columns(2)
         with col1: 
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Dataframe</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Dataframe</p>'
             st.markdown(original_header, unsafe_allow_html=True)
             st.dataframe(data=hourly_df, width=800, height=300)
 
         with col2:
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Statistics</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Statistics</p>'
             st.markdown(original_header, unsafe_allow_html=True) 
             st.write(hourly_df.describe()) 
 
@@ -110,25 +118,25 @@ if uploaded_file is not None:
 
         col1, col2 = st.columns(2)
         with col1: 
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Dataframe</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Dataframe</p>'
             st.markdown(original_header, unsafe_allow_html=True)
             st.dataframe(data=day_df, width=800, height=300)
 
         with col2:
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Statistics</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Statistics</p>'
             st.markdown(original_header, unsafe_allow_html=True) 
             st.write(day_df.describe())
             # For spaces
             placeholder = st.empty()
             with placeholder.container():
                 i=0
-                while i<6:
+                while i<9:
                     st.write("")
                     i+=1 
                  
         
         with col1:
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Additional Insights</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Additional Insights on Daily trend</p>'
             st.markdown(original_header, unsafe_allow_html=True)
             fig, ax = plt.subplots()  
             ax = sns.heatmap(df_np_2d, cmap="viridis")
@@ -172,7 +180,7 @@ if uploaded_file is not None:
         
         col1, col2 = st.columns(2)
         with col1: 
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Dataframe</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Dataframe</p>'
             st.markdown(original_header, unsafe_allow_html=True)
             st.dataframe(data=week_df, width=800, height=300)
             # For spaces
@@ -181,7 +189,7 @@ if uploaded_file is not None:
                 st.write("")
                 i+=1
 
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Additional Insights</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Additional Insights on Day of the week trends</p>'
             st.markdown(original_header, unsafe_allow_html=True)
             fig, ax = plt.subplots()  
             ax = sns.heatmap(week_np, cmap="viridis")
@@ -193,14 +201,14 @@ if uploaded_file is not None:
             
 
         with col2:
-            original_header = '<p style="font-family:Courier; color:White; font-size: 24px;">Statistics</p>'
+            original_header = '<p style="font-family:Courier; color:#172A3A; font-size: 24px;">Statistics</p>'
             st.markdown(original_header, unsafe_allow_html=True) 
             st.write(week_df.describe())
             # For spaces
             placeholder = st.empty()
             with placeholder.container():
                 i=0
-                while i<3:
+                while i<5:
                     st.write("")
                     i+=1
 
@@ -215,12 +223,7 @@ if uploaded_file is not None:
         
 
 #--------------------------------------------------------
-# Using "with" notation
-with st.sidebar:
-    add_radio = st.radio(
-        "Select the length of each timestamp",
-        ("Quater-Hour", "Hourly", "Daily", "Weekly")
-    )
+
 
 
 
