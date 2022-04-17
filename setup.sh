@@ -11,7 +11,6 @@ backgroundColor="#172a3a"
 secondaryBackgroundColor="#2bb3a0"
 textColor="#ffffff"
 font="monospace"
-"\
 [server]\n\
 headless = true\n\
 enableCORS=false\n\
